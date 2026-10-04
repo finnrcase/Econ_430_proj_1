@@ -1,0 +1,36 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build and packaging output
+build/
+dist/
+*.egg-info/
+
+# Local coverage output
+.coverage
+.coverage.*
+htmlcov/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local secrets
+.env
+.env.*
+
+# Raw SimFin data is intentionally not ignored.
