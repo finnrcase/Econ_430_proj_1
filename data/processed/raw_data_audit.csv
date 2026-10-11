@@ -1,0 +1,4 @@
+dataset,rows,companies,published_after_snapshot,report_after_snapshot,restated_before_publish,missing_dates
+income,47685,3733,2319,0,587,0
+balance,47680,3733,2315,0,11,0
+cashflow,47687,3733,2320,0,3114,0

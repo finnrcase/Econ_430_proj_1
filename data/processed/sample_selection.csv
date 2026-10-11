@@ -1,0 +1,13 @@
+stage,remaining,excluded_at_stage
+Exact-date market universe,4699,0
+Positive market capitalization,4440,259
+Positive source price and shares outstanding,4440,0
+Eligible fresh four-quarter income window,1948,2492
+Matched four-quarter USD cashflow and balance,1943,5
+Fresh balance sheet,1943,0
+Positive revenue,1758,185
+Positive EBITDA,1365,393
+Positive enterprise value,779,586
+"Complete finite financial outcome and controls, including eight-quarter growth",757,22
+Exclude provisional financial-related industries (104xxx),742,15
+Reviewed AI classification and complete model variables,3,739

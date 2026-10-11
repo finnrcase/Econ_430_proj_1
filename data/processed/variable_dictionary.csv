@@ -1,0 +1,85 @@
+variable,definition,dtype
+Ticker,Source field or audit field; see notebook construction.,str
+SimFinId,Source field or audit field; see notebook construction.,int64
+Date,Source field or audit field; see notebook construction.,datetime64[us]
+Close,Source field or audit field; see notebook construction.,float64
+Shares Outstanding,Source field or audit field; see notebook construction.,float64
+Market_Cap,Same-date source split-adjusted Close times source Shares Outstanding; USD proxy; share vintage not independently verified.,float64
+Revenue_TTM,Four complete consecutive latest eligible quarterly revenues; USD consistency checked separately.,float64
+Operating_Income_TTM,Four complete consecutive latest eligible quarterly operating income observations.,float64
+Income_First_Report_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Income_Latest_Report_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Income_Latest_Publish_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Income_Latest_Restated_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Income_Restated_After_Valuation,Source field or audit field; see notebook construction.,object
+Income_Timing_Unknown,Source field or audit field; see notebook construction.,object
+Income_Date_Chronology_Anomaly,Source field or audit field; see notebook construction.,object
+Income_USD,Source field or audit field; see notebook construction.,object
+DA_TTM_Source,Four complete consecutive cash-flow depreciation and amortization observations before income-window matching.,float64
+Cashflow_First_Report_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Cashflow_Latest_Report_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Cashflow_Latest_Publish_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Cashflow_Latest_Restated_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Cashflow_Restated_After_Valuation,Source field or audit field; see notebook construction.,object
+Cashflow_Timing_Unknown,Source field or audit field; see notebook construction.,object
+Cashflow_Date_Chronology_Anomaly,Source field or audit field; see notebook construction.,object
+Cashflow_USD,Source field or audit field; see notebook construction.,object
+Growth_First_Report_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Growth_Latest_Report_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Growth_Latest_Publish_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Growth_Latest_Restated_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Prior_Revenue_TTM,"Sum of first four of eight selected consecutive quarters, requiring four nonmissing values.",float64
+Growth_Current_Revenue_TTM,Source field or audit field; see notebook construction.,float64
+Growth_Current_First_Report_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Growth_USD,Source field or audit field; see notebook construction.,object
+Growth_Timing_Unknown,Source field or audit field; see notebook construction.,object
+Growth_Date_Chronology_Anomaly,Source field or audit field; see notebook construction.,object
+Growth_Restated_After_Valuation,Source field or audit field; see notebook construction.,object
+Revenue_Growth,Current four-quarter revenue / preceding four-quarter revenue - 1; eight consecutive complete USD quarters; prior >0.,float64
+Matching_TTM_Window,Source field or audit field; see notebook construction.,bool
+Matching_Growth_Window,Source field or audit field; see notebook construction.,bool
+DA_TTM,DA_TTM_Source only when income/cashflow first and last report dates match.,float64
+EBITDA_TTM,"Operating_Income_TTM + DA_TTM; standardized proxy, not adjusted EBITDA.",float64
+EBITDA_Margin,"Operating income plus cash-flow D&A over matching four quarters, divided by nonzero revenue; decimal.",float64
+Balance_Report_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Balance_Publish_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Balance_Restated_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Balance_Currency,Source field or audit field; see notebook construction.,str
+Balance_Date_Chronology_Anomaly,Source field or audit field; see notebook construction.,object
+"Cash, Cash Equivalents & Short Term Investments",Source field or audit field; see notebook construction.,float64
+Short Term Debt,Source field or audit field; see notebook construction.,float64
+Long Term Debt,Source field or audit field; see notebook construction.,float64
+Total_Assets,"Latest available balance-sheet stock, USD before ratio eligibility checks; not a four-quarter sum.",float64
+Total_Equity,Source field or audit field; see notebook construction.,float64
+Total_Debt,Short Term Debt + Long Term Debt; either component missing makes total missing; no zero imputation.,float64
+Balance_Is_Stale,Source field or audit field; see notebook construction.,object
+Balance_Restated_After_Valuation,Source field or audit field; see notebook construction.,object
+Balance_Timing_Unknown,Source field or audit field; see notebook construction.,object
+Financials_In_USD,Source field or audit field; see notebook construction.,bool
+Enterprise_Value_Raw,Market_Cap + Total_Debt - cash including short-term investments; no preferred or noncontrolling interests.,float64
+Enterprise_Value,Enterprise_Value_Raw only for fresh USD balance sheets.,float64
+Leverage_Raw,Source field or audit field; see notebook construction.,float64
+Leverage,Short-term plus long-term debt / positive total assets; fresh USD balance sheet; decimal.,float64
+EV_EBITDA,Simplified USD enterprise value / matching four-quarter EBITDA; zero EBITDA is missing.,float64
+log_Market_Cap,"Natural log of positive same-date source Close times source Shares Outstanding, in USD.",float64
+Company Name,Source field or audit field; see notebook construction.,str
+IndustryId,SimFin categorical industry identifier; name dictionary not supplied; 104xxx screen provisional.,float64
+Market,Source field or audit field; see notebook construction.,str
+CIK,Source field or audit field; see notebook construction.,float64
+Income_Age_Days,Source field or audit field; see notebook construction.,float64
+Balance_Age_Days,Source field or audit field; see notebook construction.,float64
+Any_Later_Restatement,Any selected income/cashflow/growth/balance source revision date after snapshot; latest-restated values retained.,bool
+Timing_Coverage_Complete,Source field or audit field; see notebook construction.,bool
+Any_Date_Chronology_Anomaly,Any selected source has revision before publication or publication before report date; investigation pending.,bool
+AI_Status,Source field or audit field; see notebook construction.,string
+AI_Exposed,1 confirmed material commercial AI exposure; 0 reviewed comparison; blank uncertain/unreviewed.,float64
+AI_Rationale,Source field or audit field; see notebook construction.,str
+AI_Source,Source field or audit field; see notebook construction.,str
+AI_Evidence_Date,Source field or audit field; see notebook construction.,datetime64[us]
+AI_Reviewer,Source field or audit field; see notebook construction.,str
+AI_Review_Date,Source field or audit field; see notebook construction.,datetime64[us]
+Financial_Industry_Provisional,Source field or audit field; see notebook construction.,bool
+Financial_Ready,"Complete positive-valuation financial pool with provisional financial-sector exclusion, regardless of AI review.",bool
+Candidate_Analysis,Financial_Ready plus reviewed AI classification; completeness does not establish adequate group overlap.,bool
+Known_Source_Discrepancy,LiveWire operating income differs from original Q2 2025 earnings release; source values preserved.,bool
+Within_Hypothetical_1_99_Trim,"Sensitivity flag only, based on financial-pool p01/p99 for multiple/growth/margin/leverage; originals preserved.",bool

@@ -6,3 +6,6 @@ statsmodels
 scikit-learn
 jupyter
 openpyxl
+nbformat
+nbclient
+ipykernel

@@ -1,0 +1,21 @@
+{
+  "valuation_date": "2025-09-30",
+  "historical_point_in_time_verified": false,
+  "working_firms": 4699,
+  "financial_pool_firms": 742,
+  "candidate_firms": 3,
+  "candidate_has_both_AI_groups": true,
+  "requirement_500_met": false,
+  "potential_predictor_concepts": 6,
+  "AI_classification_complete": false,
+  "python": "3.13.11",
+  "pandas": "3.0.3",
+  "numpy": "2.5.1",
+  "raw_sha256": {
+    "us-balance-quarterly.zip": "ab89606a4460565fad4d366d0df7bba206aac3b4424d7288aade57ec88eae3e1",
+    "us-cashflow-quarterly.zip": "2adb2f11399e8438b98beecc05812a393cde98004d52b4343d545d3c6659ba07",
+    "us-companies.zip": "647a706571b7067025ecfc5b69e4f3a7eb15fd94a3512d792c6fd86db570463a",
+    "us-income-quarterly.zip": "b863d3c6fdce4e829e7f68d2b8e759caf961a4c42ae733d7bc75aca4552cb0b5",
+    "us-shareprices-daily.zip": "b0ffe9f2a28e5f292875770c1185e76359f96bd82cf3da680fe732b5344d94c2"
+  }
+}

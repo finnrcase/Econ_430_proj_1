@@ -1,73 +1,49 @@
-# UCLA Econ 430 — Project 1
-
-**Course:** UCLA Econ 430 — Applied Econometrics with Python  
-**Project:** Project 1 — Applied Econometric Analysis
+﻿# UCLA Econ 430 — Project 1
 
 ## Research question
 
-What fundamental firm characteristics explain differences in valuation multiples across publicly traded U.S. companies?
+Do AI-exposed publicly traded firms trade at higher valuation multiples than other firms, after accounting for revenue growth, profitability, size, leverage, and industry?
 
-This project will study cross-sectional stock valuation. The repository currently contains original data downloads and organizational placeholders only. No data cleaning, variable construction, or econometric analysis has been performed.
+## Historical snapshot and status
 
-## Data source
+Valuation date: **September 30, 2025**, not current-day data. Notebook 1 prepares financial data and quality reports; no regressions or model selection have been run.
 
-SimFin U.S. financial data. Original downloads are preserved in `data/raw/`:
+The financial-ready pool has **742 unique companies** after a provisional financial-industry exclusion. The working universe has **4,699 companies**. AI classification is **incomplete**: four primary-source seed reviews (NVIDIA and Microsoft exposed; Coca-Cola and P&G reviewed comparisons). Only three of those have complete candidate financial data. NVIDIA has missing short-term debt, which remains missing. The strict AI candidate therefore does **not** meet the assignment's 500-observation requirement. Six predictor concepts are available: AI exposure, revenue growth, EBITDA margin, log market cap, leverage, and categorical industry.
 
-| Dataset | Original file |
-| --- | --- |
-| Companies | `us-companies.zip` |
-| Quarterly income statements | `us-income-quarterly.zip` |
-| Quarterly balance sheets | `us-balance-quarterly.zip` |
-| Quarterly cash flow statements | `us-cashflow-quarterly.zip` |
-| Daily share prices | `us-shareprices-daily.zip` |
+These are latest-restated financial values joined to historical prices. Publication-date filters do not make the files fully point-in-time. Only seven financial-ready firms have no later-restatement flags. Source chronology anomalies, a verified LiveWire operating-income discrepancy, D&A definition differences, the absent official industry-name dictionary, and share-history vintage need further review. Originals and flags are retained; no automatic outlier deletion or winsorization is applied.
 
-**Raw data must NEVER be manually edited.** Preserve each original archive exactly as downloaded, including its filename and contents. All future cleaning and transformations must be reproducible through Python and write derived datasets to `data/processed/`, leaving the raw originals untouched.
+## Raw data
 
-## Repository structure
+Original SimFin archives are in `data/raw/`: company metadata, quarterly income statements, balance sheets, cash flows, and daily share prices. Do not edit them. The notebook records SHA-256 hashes and makes all derived transformations reproducible. All merges validate one-to-one company IDs.
 
-```text
-Econ_430_proj_1/
-├── data/
-│   ├── raw/          # Original, unchanged SimFin downloads
-│   └── processed/    # Future reproducibly generated datasets
-├── notebooks/        # Numbered workflow notebooks
-├── src/              # Reusable Python modules
-├── figures/          # Future generated figures
-├── tables/           # Future generated tables
-├── report/           # Final report and supporting writing
-├── README.md
-├── requirements.txt
-└── .gitignore
-```
+Quarterly cash-flow D&A and operating cash flow reconcile to Apple FY2024 and NVIDIA FY2025 annual totals. TTM construction requires four consecutive, complete quarters; revenue growth requires eight and a positive prior-year revenue denominator. Missing debt is never assumed zero. See Notebook 1 for exact rules and primary-source links.
 
-Empty output directories contain `.gitkeep` files so Git can preserve the structure.
+## Run Notebook 1
 
-## Planned workflow
+From the project root, create an environment and install the tested Notebook 1 versions:
 
-Raw data → data cleaning → construct a single cross-sectional company dataset → exploratory data analysis → variable selection → competing OLS models → model comparison → diagnostics → robustness testing → economic interpretation → final report.
-
-| Notebook | Intended purpose |
-| --- | --- |
-| `01_build_dataset.ipynb` | Load and clean source data, then construct the cross-sectional company dataset. |
-| `02_exploratory_analysis.ipynb` | Explore distributions and relationships in the constructed dataset. |
-| `03_variable_selection.ipynb` | Assess candidate variables and justify specification choices. |
-| `04_model_development.ipynb` | Develop competing OLS models and compare their results. |
-| `05_diagnostics_robustness.ipynb` | Assess model diagnostics and robustness to alternative choices. |
-| `06_results_interpretation.ipynb` | Interpret economic findings and prepare material for the final report. |
-
-All notebooks currently contain markdown only. Python modules currently contain only module-level docstrings.
-
-Potential future variables include EV/EBITDA or another appropriate valuation multiple, revenue growth, EBITDA margin, ROIC, debt/EBITDA, free cash flow margin, firm size or market capitalization, and sector/industry controls. These are tentative and have not been calculated.
-
-## Python environment
-
-`requirements.txt` lists the anticipated dependencies. When analysis begins, create a virtual environment and install them with:
-
-```sh
+```powershell
 python -m venv .venv
-# Activate .venv using the command appropriate for your operating system.
-python -m pip install -r requirements.txt
-jupyter notebook
+.\.venv\Scripts\python.exe -m pip install -r requirements-notebook1.lock.txt
+.\.venv\Scripts\python.exe src\run_notebook.py
 ```
 
-No packages are installed as part of repository organization. Dependency versions are currently unpinned; record the validated versions when the analytical workflow is developed so the final results can be reproduced.
+Or select that environment in the notebook editor, restart the kernel, and run all cells in order. `src/run_notebook.py` uses a new kernel, saves outputs, and validates successful execution. It does not regenerate the notebook or erase manual edits. `src/build_notebook.py` is the authoring source and regenerates the notebook layout if intentionally invoked.
+
+No network access is needed for notebook execution. External evidence already reviewed is recorded in the mapping and notebook. The separate `requirements.txt` retains broader planned project dependencies.
+
+## Outputs in data/processed/
+
+- `working_dataset.csv`: all priced firms, financial variables, classifications, and audit flags.
+- `financial_pool_AI_PENDING.csv`: financial-ready pool for preliminary financial EDA; unknown AI exposure stays blank.
+- `candidate_analysis_INCOMPLETE.csv`: complete model variables including reviewed AI labels; not a finished analysis sample.
+- `ai_mapping_PENDING.csv`: IDs, status, rationale, primary-source URL, evidence publication date, reviewer, and review date. Reruns preserve reviews and validate labels and dates.
+- `sample_selection_report_INCOMPLETE.md`: selection, missingness, classification, industry, timing, and outlier reports.
+- Supporting CSVs: sample selection, missingness, industry composition, restatement sensitivity, raw/window/merge audits, original source quarters, outlier review queue, hypothetical trim thresholds, filing reviews, and variable dictionary.
+- `build_manifest.json`: historical date, counts, limitations, library versions, and raw archive hashes.
+
+The 104xxx financial-related industry screen is conservative and provisional until checked against the official dictionary. Financial firms remain in the working dataset and inclusive sensitivity counts.
+
+## Next stage
+
+Notebook 2 may start financial EDA with these flags and limitations. AI-group comparisons require broader historical classification and within-industry overlap. The remaining notebooks are placeholders; regression development, diagnostics, and interpretation are outside Notebook 1's scope.
